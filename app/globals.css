@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #e0e5ec;
+  color: #2c3e50;
+  overflow-x: hidden;
+}
+
+@layer utilities {
+  .neuro-card {
+    @apply bg-neuro-bg rounded-3xl shadow-neuro;
+  }
+
+  .neuro-button {
+    @apply bg-neuro-bg rounded-xl shadow-neuro hover:shadow-neuro-sm transition-all duration-300 active:shadow-neuro-inset;
+  }
+
+  .neuro-input {
+    @apply bg-neuro-bg rounded-xl shadow-neuro-inset outline-none;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e0e5ec;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a3b1c6;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8a99ad;
+}
