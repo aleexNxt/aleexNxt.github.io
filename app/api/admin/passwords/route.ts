@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getUpcomingPasswords } from '@/lib/auth-server';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 /**
  * API Route: Admin Password Retrieval
