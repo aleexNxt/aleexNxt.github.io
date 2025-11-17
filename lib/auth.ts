@@ -1,55 +1,80 @@
-// Utility für passwortgeschützten Zugriff
-// Das Passwort wechselt alle 4 Tage
+// Client-side API wrapper for authentication
+// NO password generation logic here - everything happens server-side
 
-const SECRET_SEED = 'portfolio-cv-2025'; // Ändern Sie diesen Seed für Sicherheit
+/**
+ * Verifies password via API and returns access token
+ */
+export async function verifyPasswordAPI(password: string): Promise<{
+  success: boolean;
+  token?: string;
+  error?: string;
+}> {
+  try {
+    const response = await fetch('/api/verify-password', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ password }),
+    });
 
-export function getCurrentPassword(): string {
-  // Berechne die Anzahl der Tage seit einem festen Datum
-  const startDate = new Date('2025-01-01').getTime();
-  const now = Date.now();
-  const daysSinceStart = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
+    const data = await response.json();
 
-  // Alle 4 Tage wechseln
-  const period = Math.floor(daysSinceStart / 4);
+    if (!response.ok) {
+      return {
+        success: false,
+        error: data.error || 'Fehler bei der Authentifizierung',
+      };
+    }
 
-  // Einfacher Hash-Algorithmus
-  const hash = simpleHash(SECRET_SEED + period);
-
-  // Generiere ein 6-stelliges Passwort aus dem Hash
-  return generatePassword(hash);
-}
-
-function simpleHash(str: string): number {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    const char = str.charCodeAt(i);
-    hash = ((hash << 5) - hash) + char;
-    hash = hash & hash; // Convert to 32bit integer
+    return {
+      success: true,
+      token: data.token,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: 'Netzwerkfehler. Bitte versuchen Sie es erneut.',
+    };
   }
-  return Math.abs(hash);
 }
 
-function generatePassword(hash: number): string {
-  // Generiere ein 6-stelliges alphanumerisches Passwort
-  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // Ohne verwirrende Zeichen
-  let password = '';
-  let num = hash;
+/**
+ * Retrieves CV PDF using valid access token
+ */
+export async function getCVPDF(token: string): Promise<Blob | null> {
+  try {
+    const response = await fetch('/api/get-cv', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ token }),
+    });
 
-  for (let i = 0; i < 6; i++) {
-    password += chars[num % chars.length];
-    num = Math.floor(num / chars.length);
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error('PDF fetch error:', errorData.error);
+      return null;
+    }
+
+    return await response.blob();
+  } catch (error) {
+    console.error('Network error fetching PDF:', error);
+    return null;
   }
-
-  return password;
 }
 
-export function verifyPassword(input: string): boolean {
-  return input.toUpperCase() === getCurrentPassword();
+/**
+ * Helper function to generate download URL from PDF blob
+ */
+export function generatePDFDownloadURL(blob: Blob, filename?: string): string {
+  return URL.createObjectURL(blob);
 }
 
-// Für Entwicklung/Debug - zeigt aktuelles Passwort in der Konsole
-export function logCurrentPassword() {
-  if (process.env.NODE_ENV === 'development') {
-    console.log('Current CV Password:', getCurrentPassword());
-  }
+/**
+ * Helper function to revoke PDF blob URL (cleanup)
+ */
+export function revokePDFURL(url: string): void {
+  URL.revokeObjectURL(url);
 }

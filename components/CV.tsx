@@ -1,15 +1,15 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { verifyPassword, logCurrentPassword } from '@/lib/auth';
-import { getCVPDF, generatePDFDownloadURL, revokePDFURL } from '@/lib/cv-pdf';
+import { verifyPasswordAPI, getCVPDF, generatePDFDownloadURL, revokePDFURL } from '@/lib/auth';
 
 export default function CV() {
   const [isVisible, setIsVisible] = useState(false);
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [password, setPassword] = useState('');
-  const [validatedPassword, setValidatedPassword] = useState('');
+  const [token, setToken] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [pdfURL, setPdfURL] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -27,50 +27,70 @@ export default function CV() {
       observer.observe(sectionRef.current);
     }
 
-    // Log Passwort für Entwicklung
-    logCurrentPassword();
-
     return () => observer.disconnect();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (verifyPassword(password)) {
+    setIsLoading(true);
+    setError('');
+
+    const result = await verifyPasswordAPI(password);
+
+    if (result.success && result.token) {
       setIsUnlocked(true);
-      setValidatedPassword(password);
-      setError('');
+      setToken(result.token);
       setPassword('');
     } else {
-      setError('Falsches Passwort. Das Passwort wechselt alle 4 Tage.');
+      setError(result.error || 'Fehler bei der Authentifizierung');
       setPassword('');
     }
+
+    setIsLoading(false);
   };
 
-  const handleDownloadPDF = () => {
-    const pdfBlob = getCVPDF(validatedPassword);
+  const handleDownloadPDF = async () => {
+    setIsLoading(true);
+    const pdfBlob = await getCVPDF(token);
+
     if (pdfBlob) {
       const url = generatePDFDownloadURL(pdfBlob, 'Lebenslauf_Alexander.pdf');
 
-      // Öffne PDF in neuem Tab
-      window.open(url, '_blank');
+      // Create download link
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'Lebenslauf_Alexander.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
 
-      // Bereinige URL nach 1 Minute
+      // Cleanup URL after 1 minute
       setTimeout(() => {
         revokePDFURL(url);
       }, 60000);
     } else {
-      setError('Fehler beim Laden des PDFs.');
+      setError('Fehler beim Laden des PDFs. Bitte erneut authentifizieren.');
+      setIsUnlocked(false);
+      setToken('');
     }
+
+    setIsLoading(false);
   };
 
-  const handleViewPDF = () => {
-    const pdfBlob = getCVPDF(validatedPassword);
+  const handleViewPDF = async () => {
+    setIsLoading(true);
+    const pdfBlob = await getCVPDF(token);
+
     if (pdfBlob) {
       const url = generatePDFDownloadURL(pdfBlob);
       setPdfURL(url);
     } else {
-      setError('Fehler beim Laden des PDFs.');
+      setError('Fehler beim Laden des PDFs. Bitte erneut authentifizieren.');
+      setIsUnlocked(false);
+      setToken('');
     }
+
+    setIsLoading(false);
   };
 
   const handleClosePDF = () => {
@@ -123,6 +143,7 @@ export default function CV() {
                     maxLength={6}
                     required
                     autoComplete="off"
+                    disabled={isLoading}
                   />
                   {error && (
                     <p className="text-red-500 text-sm mt-2">{error}</p>
@@ -131,9 +152,10 @@ export default function CV() {
 
                 <button
                   type="submit"
-                  className="px-6 py-3 border border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 text-sm font-medium"
+                  disabled={isLoading}
+                  className="px-6 py-3 border border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Zugriff anfordern
+                  {isLoading ? 'Wird überprüft...' : 'Zugriff anfordern'}
                 </button>
               </form>
 
@@ -158,16 +180,18 @@ export default function CV() {
                 <div className="space-y-3">
                   <button
                     onClick={handleDownloadPDF}
-                    className="w-full px-6 py-4 border border-primary bg-primary text-white hover:bg-transparent hover:text-primary transition-all duration-300 text-sm font-medium"
+                    disabled={isLoading}
+                    className="w-full px-6 py-4 border border-primary bg-primary text-white hover:bg-transparent hover:text-primary transition-all duration-300 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    PDF herunterladen
+                    {isLoading ? 'Lädt...' : 'PDF herunterladen'}
                   </button>
 
                   <button
                     onClick={handleViewPDF}
-                    className="w-full px-6 py-4 border border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 text-sm font-medium"
+                    disabled={isLoading}
+                    className="w-full px-6 py-4 border border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    PDF im Browser öffnen
+                    {isLoading ? 'Lädt...' : 'PDF im Browser öffnen'}
                   </button>
                 </div>
               </div>
@@ -175,7 +199,7 @@ export default function CV() {
               <button
                 onClick={() => {
                   setIsUnlocked(false);
-                  setValidatedPassword('');
+                  setToken('');
                   handleClosePDF();
                 }}
                 className="text-sm text-secondary hover:text-primary transition-colors underline underline-offset-4"
