@@ -25,7 +25,13 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+.env
 .env*.local
+.env.local
+.env.production
+
+# private CV PDF (never commit the actual CV)
+private/cv.pdf
 
 # vercel
 .vercel
