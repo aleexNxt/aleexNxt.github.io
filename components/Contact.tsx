@@ -26,18 +26,18 @@ export default function Contact() {
   const contactLinks = [
     {
       label: 'Email',
-      value: 'kontakt@example.com',
-      href: 'mailto:kontakt@example.com'
+      value: 'alexander.kruska@protonmail.com',
+      href: 'mailto:alexander.kruska@protonmail.com'
     },
     {
       label: 'GitHub',
-      value: 'github.com/username',
-      href: 'https://github.com/username'
+      value: 'github.com/aleexNxt',
+      href: 'https://github.com/aleexNxt'
     },
     {
       label: 'LinkedIn',
-      value: 'linkedin.com/in/username',
-      href: 'https://linkedin.com/in/username'
+      value: 'linkedin.com/in/alexanderkruska',
+      href: 'https://www.linkedin.com/in/alexanderkruska/'
     }
   ];
 

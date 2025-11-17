@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyPassword } from '@/lib/auth-server';
-import { promises as fs } from 'fs';
-import path from 'path';
+import { readFile } from 'fs/promises';
+import { join } from 'path';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 /**
  * API Route: CV PDF Delivery
@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
 
     // Check token age (max 1 hour)
     const tokenAge = Date.now() - tokenData.timestamp;
-    const MAX_TOKEN_AGE = 60 * 60 * 1000; // 1 hour
+    const MAX_TOKEN_AGE = 60 * 60 * 1000;
 
     if (tokenAge > MAX_TOKEN_AGE) {
       return NextResponse.json(
@@ -51,11 +51,11 @@ export async function POST(request: NextRequest) {
     }
 
     // Load PDF from private directory
-    const pdfPath = path.join(process.cwd(), 'private', 'cv.pdf');
+    const pdfPath = join(process.cwd(), 'private', 'cv.pdf');
 
     let pdfBuffer;
     try {
-      pdfBuffer = await fs.readFile(pdfPath);
+      pdfBuffer = await readFile(pdfPath);
     } catch (error) {
       console.error('PDF not found:', error);
       return NextResponse.json(
