@@ -9,16 +9,29 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'neuro-bg': '#e0e5ec',
-        'neuro-dark': '#a3b1c6',
-        'neuro-light': '#ffffff',
-        'neuro-accent': '#6366f1',
+        'primary': '#000000',
+        'secondary': '#666666',
+        'accent': '#0066FF',
+        'background': '#FFFFFF',
+        'border': '#E5E5E5',
       },
-      boxShadow: {
-        'neuro': '8px 8px 16px #a3b1c6, -8px -8px 16px #ffffff',
-        'neuro-inset': 'inset 8px 8px 16px #a3b1c6, inset -8px -8px 16px #ffffff',
-        'neuro-sm': '4px 4px 8px #a3b1c6, -4px -4px 8px #ffffff',
-        'neuro-lg': '12px 12px 24px #a3b1c6, -12px -12px 24px #ffffff',
+      fontFamily: {
+        'sans': ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        'mono': ['Monaco', 'Courier New', 'monospace'],
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.6s ease-in-out',
+        'slide-up': 'slideUp 0.6s ease-out',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%': { transform: 'translateY(20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
       },
     },
   },
