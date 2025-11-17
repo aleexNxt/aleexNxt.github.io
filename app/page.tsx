@@ -1,20 +1,16 @@
 import Hero from '@/components/Hero';
 import About from '@/components/About';
-import Skills from '@/components/Skills';
-import Projects from '@/components/Projects';
-import Career from '@/components/Career';
+import Work from '@/components/Work';
 import Contact from '@/components/Contact';
 import Navigation from '@/components/Navigation';
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-white">
       <Navigation />
       <Hero />
       <About />
-      <Skills />
-      <Projects />
-      <Career />
+      <Work />
       <Contact />
     </main>
   );

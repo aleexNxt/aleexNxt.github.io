@@ -13,7 +13,7 @@ export default function About() {
           setIsVisible(true);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.2 }
     );
 
     if (sectionRef.current) {
@@ -27,80 +27,60 @@ export default function About() {
     <section
       id="about"
       ref={sectionRef}
-      className="min-h-screen flex items-center justify-center px-4 py-20"
+      className="min-h-screen flex items-center justify-center px-6 md:px-12 py-24"
     >
-      <div className="container mx-auto max-w-6xl">
+      <div className="max-w-4xl w-full">
         <div
           className={`transition-all duration-1000 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
           }`}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-gray-800">
-            Über <span className="text-neuro-accent">mich</span>
+          <h2 className="text-sm uppercase tracking-wider text-secondary mb-4">
+            Über mich
           </h2>
+          <div className="space-y-6">
+            <h3 className="text-3xl md:text-4xl font-bold leading-tight">
+              21-jähriger Software-Entwickler im 3. Ausbildungsjahr
+            </h3>
 
-          <div className="neuro-card p-8 md:p-12">
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-2xl font-bold mb-4 text-neuro-accent">
-                  Meine Story
-                </h3>
-                <p className="text-gray-700 mb-4 leading-relaxed">
-                  Als leidenschaftlicher Entwickler habe ich mich auf die Entwicklung
-                  moderner, benutzerfreundlicher Webanwendungen spezialisiert. Mit
-                  einem Auge für Details und einem starken Fokus auf Code-Qualität
-                  bringe ich Projekte zum Erfolg.
-                </p>
-                <p className="text-gray-700 leading-relaxed">
-                  Meine Begeisterung für Technologie treibt mich an, ständig neue
-                  Fähigkeiten zu erlernen und mich in neue Technologien zu vertiefen.
-                  Ich glaube an sauberen, wartbaren Code und agile Entwicklungsprozesse.
-                </p>
-              </div>
+            <div className="prose prose-lg max-w-none">
+              <p className="text-lg text-secondary leading-relaxed">
+                Derzeit absolviere ich meine Ausbildung zum Fachinformatiker für
+                Anwendungsentwicklung bei <span className="text-primary font-medium">Lufthansa Industry Solutions</span> in Frankfurt.
+                Im dritten Lehrjahr konzentriere ich mich auf die Entwicklung skalierbarer
+                Backend-Systeme und moderner Web-Anwendungen.
+              </p>
 
-              <div>
-                <h3 className="text-2xl font-bold mb-4 text-neuro-accent">
-                  Was mich auszeichnet
-                </h3>
-                <ul className="space-y-3">
-                  {[
-                    'Problemlösungsorientiertes Denken',
-                    'Schnelle Auffassungsgabe',
-                    'Teamfähigkeit & Kommunikationsstärke',
-                    'Kontinuierliche Weiterbildung',
-                    'Agile Arbeitsweise',
-                    'Best Practices & Clean Code',
-                  ].map((item, index) => (
-                    <li
-                      key={index}
-                      className="flex items-center space-x-3"
-                    >
-                      <div className="neuro-card w-3 h-3 rounded-full bg-neuro-accent flex-shrink-0"></div>
-                      <span className="text-gray-700">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <p className="text-lg text-secondary leading-relaxed">
+                Meine Leidenschaft gilt der Backend-Entwicklung mit <span className="text-primary font-medium">Go (Golang)</span>,
+                wo ich die Performance und Einfachheit der Sprache schätze. Auf der Frontend-Seite
+                setze ich auf <span className="text-primary font-medium">Next.js</span>, um moderne, performante
+                Web-Anwendungen zu entwickeln.
+              </p>
+
+              <p className="text-lg text-secondary leading-relaxed">
+                Bei Lufthansa Industry Solutions arbeite ich in agilen Teams an
+                produktionsrelevanten Projekten und lerne täglich neue Technologien und
+                Best Practices in der professionellen Software-Entwicklung.
+              </p>
             </div>
 
-            <div className="mt-8 pt-8 border-t border-gray-300">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                <div className="neuro-card p-6">
-                  <div className="text-4xl font-bold text-neuro-accent mb-2">5+</div>
-                  <div className="text-gray-600">Jahre Erfahrung</div>
-                </div>
-                <div className="neuro-card p-6">
-                  <div className="text-4xl font-bold text-neuro-accent mb-2">50+</div>
-                  <div className="text-gray-600">Projekte</div>
-                </div>
-                <div className="neuro-card p-6">
-                  <div className="text-4xl font-bold text-neuro-accent mb-2">20+</div>
-                  <div className="text-gray-600">Technologien</div>
-                </div>
-                <div className="neuro-card p-6">
-                  <div className="text-4xl font-bold text-neuro-accent mb-2">100%</div>
-                  <div className="text-gray-600">Engagement</div>
-                </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-8 border-t border-border">
+              <div>
+                <div className="text-3xl font-bold mb-1">3.</div>
+                <div className="text-sm text-secondary">Lehrjahr</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold mb-1">21</div>
+                <div className="text-sm text-secondary">Jahre alt</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold mb-1">2</div>
+                <div className="text-sm text-secondary">Haupttechnologien</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold mb-1">∞</div>
+                <div className="text-sm text-secondary">Lernbereitschaft</div>
               </div>
             </div>
           </div>

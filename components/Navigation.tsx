@@ -3,15 +3,11 @@
 import { useState, useEffect } from 'react';
 
 export default function Navigation() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-
-      // Detect active section
-      const sections = ['home', 'about', 'skills', 'projects', 'career', 'contact'];
+      const sections = ['home', 'about', 'work', 'contact'];
       const current = sections.find(section => {
         const element = document.getElementById(section);
         if (element) {
@@ -28,49 +24,42 @@ export default function Navigation() {
   }, []);
 
   const navItems = [
-    { id: 'home', label: 'Start' },
-    { id: 'about', label: 'Über mich' },
-    { id: 'skills', label: 'Skills' },
-    { id: 'projects', label: 'Projekte' },
-    { id: 'career', label: 'Karriere' },
-    { id: 'contact', label: 'Kontakt' },
+    { id: 'home', label: 'Home' },
+    { id: 'about', label: 'About' },
+    { id: 'work', label: 'Work' },
+    { id: 'contact', label: 'Contact' },
   ];
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'py-4' : 'py-6'
-      }`}
-    >
-      <div className="container mx-auto px-4">
-        <div className={`neuro-card px-6 py-4 ${isScrolled ? 'shadow-neuro-sm' : ''}`}>
-          <div className="flex justify-between items-center">
-            <a href="#home" className="text-2xl font-bold text-neuro-accent">
-              Portfolio
-            </a>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-border">
+      <div className="max-w-6xl mx-auto px-6 md:px-12">
+        <div className="flex justify-between items-center h-16">
+          <a
+            href="#home"
+            className="text-lg font-medium tracking-tight hover:text-accent transition-colors"
+          >
+            Portfolio
+          </a>
 
-            <ul className="hidden md:flex space-x-2">
-              {navItems.map((item) => (
-                <li key={item.id}>
-                  <a
-                    href={`#${item.id}`}
-                    className={`px-4 py-2 rounded-lg transition-all duration-300 ${
-                      activeSection === item.id
-                        ? 'text-neuro-accent font-semibold shadow-neuro-inset'
-                        : 'hover:text-neuro-accent'
-                    }`}
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-
-            {/* Mobile menu button */}
-            <button className="md:hidden neuro-button px-4 py-2">
-              <span className="text-xl">☰</span>
-            </button>
-          </div>
+          <ul className="flex space-x-8">
+            {navItems.map((item) => (
+              <li key={item.id}>
+                <a
+                  href={`#${item.id}`}
+                  className={`text-sm transition-colors relative ${
+                    activeSection === item.id
+                      ? 'text-primary font-medium'
+                      : 'text-secondary hover:text-primary'
+                  }`}
+                >
+                  {item.label}
+                  {activeSection === item.id && (
+                    <span className="absolute -bottom-[21px] left-0 w-full h-[1px] bg-primary" />
+                  )}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </nav>

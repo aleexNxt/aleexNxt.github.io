@@ -8,45 +8,67 @@
   box-sizing: border-box;
 }
 
-body {
-  background-color: #e0e5ec;
-  color: #2c3e50;
-  overflow-x: hidden;
-}
-
-@layer utilities {
-  .neuro-card {
-    @apply bg-neuro-bg rounded-3xl shadow-neuro;
-  }
-
-  .neuro-button {
-    @apply bg-neuro-bg rounded-xl shadow-neuro hover:shadow-neuro-sm transition-all duration-300 active:shadow-neuro-inset;
-  }
-
-  .neuro-input {
-    @apply bg-neuro-bg rounded-xl shadow-neuro-inset outline-none;
-  }
-}
-
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom scrollbar */
+body {
+  background-color: #FFFFFF;
+  color: #000000;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Selection */
+::selection {
+  background-color: #000000;
+  color: #FFFFFF;
+}
+
+/* Custom scrollbar - minimal */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #e0e5ec;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #a3b1c6;
-  border-radius: 6px;
+  background: #E5E5E5;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #8a99ad;
+  background: #CCCCCC;
+}
+
+/* Utility classes */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
