@@ -2,12 +2,15 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { verifyPassword, logCurrentPassword } from '@/lib/auth';
+import { getCVPDF, generatePDFDownloadURL, revokePDFURL } from '@/lib/cv-pdf';
 
 export default function CV() {
   const [isVisible, setIsVisible] = useState(false);
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [password, setPassword] = useState('');
+  const [validatedPassword, setValidatedPassword] = useState('');
   const [error, setError] = useState('');
+  const [pdfURL, setPdfURL] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -34,10 +37,46 @@ export default function CV() {
     e.preventDefault();
     if (verifyPassword(password)) {
       setIsUnlocked(true);
+      setValidatedPassword(password);
       setError('');
+      setPassword('');
     } else {
       setError('Falsches Passwort. Das Passwort wechselt alle 4 Tage.');
       setPassword('');
+    }
+  };
+
+  const handleDownloadPDF = () => {
+    const pdfBlob = getCVPDF(validatedPassword);
+    if (pdfBlob) {
+      const url = generatePDFDownloadURL(pdfBlob, 'Lebenslauf_Alexander.pdf');
+
+      // Öffne PDF in neuem Tab
+      window.open(url, '_blank');
+
+      // Bereinige URL nach 1 Minute
+      setTimeout(() => {
+        revokePDFURL(url);
+      }, 60000);
+    } else {
+      setError('Fehler beim Laden des PDFs.');
+    }
+  };
+
+  const handleViewPDF = () => {
+    const pdfBlob = getCVPDF(validatedPassword);
+    if (pdfBlob) {
+      const url = generatePDFDownloadURL(pdfBlob);
+      setPdfURL(url);
+    } else {
+      setError('Fehler beim Laden des PDFs.');
+    }
+  };
+
+  const handleClosePDF = () => {
+    if (pdfURL) {
+      revokePDFURL(pdfURL);
+      setPdfURL(null);
     }
   };
 
@@ -75,14 +114,15 @@ export default function CV() {
                     Passwort
                   </label>
                   <input
-                    type="text"
+                    type="password"
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-4 py-3 border border-border focus:border-primary outline-none transition-colors font-mono tracking-wider uppercase"
-                    placeholder="XXXXXX"
+                    className="w-full px-4 py-3 border border-border focus:border-primary outline-none transition-colors font-mono tracking-wider"
+                    placeholder="••••••"
                     maxLength={6}
                     required
+                    autoComplete="off"
                   />
                   {error && (
                     <p className="text-red-500 text-sm mt-2">{error}</p>
@@ -102,86 +142,67 @@ export default function CV() {
               </p>
             </div>
           ) : (
-            <div className="space-y-8">
-              {/* CV Content */}
-              <div className="border-b border-border pb-8">
-                <h4 className="text-xl font-bold mb-4">Ausbildung</h4>
-                <div className="space-y-4">
-                  <div>
-                    <div className="flex justify-between items-start mb-2">
-                      <div>
-                        <h5 className="font-medium">Fachinformatiker für Anwendungsentwicklung</h5>
-                        <p className="text-secondary text-sm">Lufthansa Industry Solutions</p>
-                      </div>
-                      <span className="text-sm text-secondary">2022 - 2025</span>
-                    </div>
-                    <p className="text-secondary text-sm">
-                      Ausbildung zum Fachinformatiker mit Schwerpunkt auf Backend-Entwicklung
-                      und moderne Web-Technologien. Praktische Erfahrung in agilen Teams.
-                    </p>
-                  </div>
+            <div className="max-w-md">
+              <div className="border border-border p-8 mb-6">
+                <div className="flex items-center justify-center mb-6">
+                  <svg className="w-16 h-16 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
                 </div>
-              </div>
 
-              <div className="border-b border-border pb-8">
-                <h4 className="text-xl font-bold mb-4">Berufserfahrung</h4>
-                <div className="space-y-4">
-                  <div>
-                    <div className="flex justify-between items-start mb-2">
-                      <div>
-                        <h5 className="font-medium">Auszubildender Software-Entwickler</h5>
-                        <p className="text-secondary text-sm">Lufthansa Industry Solutions, Frankfurt</p>
-                      </div>
-                      <span className="text-sm text-secondary">2022 - Heute</span>
-                    </div>
-                    <ul className="text-secondary text-sm space-y-1 list-disc list-inside">
-                      <li>Entwicklung von Backend-Services mit Go (Golang)</li>
-                      <li>Frontend-Entwicklung mit Next.js und React</li>
-                      <li>Arbeit in agilen Scrum-Teams</li>
-                      <li>API-Design und Microservices-Architektur</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+                <h4 className="text-xl font-bold text-center mb-2">Zugriff gewährt</h4>
+                <p className="text-secondary text-center mb-6">
+                  Sie können nun meinen vollständigen Lebenslauf als PDF herunterladen.
+                </p>
 
-              <div className="border-b border-border pb-8">
-                <h4 className="text-xl font-bold mb-4">Technische Fähigkeiten</h4>
-                <div className="grid md:grid-cols-3 gap-6">
-                  <div>
-                    <h5 className="font-medium mb-2 text-sm">Backend</h5>
-                    <p className="text-secondary text-sm">Go, REST APIs, gRPC, PostgreSQL</p>
-                  </div>
-                  <div>
-                    <h5 className="font-medium mb-2 text-sm">Frontend</h5>
-                    <p className="text-secondary text-sm">Next.js, React, TypeScript, Tailwind</p>
-                  </div>
-                  <div>
-                    <h5 className="font-medium mb-2 text-sm">Tools</h5>
-                    <p className="text-secondary text-sm">Git, Docker, Linux, CI/CD</p>
-                  </div>
-                </div>
-              </div>
+                <div className="space-y-3">
+                  <button
+                    onClick={handleDownloadPDF}
+                    className="w-full px-6 py-4 border border-primary bg-primary text-white hover:bg-transparent hover:text-primary transition-all duration-300 text-sm font-medium"
+                  >
+                    PDF herunterladen
+                  </button>
 
-              <div>
-                <h4 className="text-xl font-bold mb-4">Sprachen</h4>
-                <div className="space-y-2">
-                  <div className="flex justify-between">
-                    <span className="text-sm">Deutsch</span>
-                    <span className="text-secondary text-sm">Muttersprache</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm">Englisch</span>
-                    <span className="text-secondary text-sm">Fließend</span>
-                  </div>
+                  <button
+                    onClick={handleViewPDF}
+                    className="w-full px-6 py-4 border border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 text-sm font-medium"
+                  >
+                    PDF im Browser öffnen
+                  </button>
                 </div>
               </div>
 
               <button
-                onClick={() => setIsUnlocked(false)}
+                onClick={() => {
+                  setIsUnlocked(false);
+                  setValidatedPassword('');
+                  handleClosePDF();
+                }}
                 className="text-sm text-secondary hover:text-primary transition-colors underline underline-offset-4"
               >
-                Lebenslauf sperren
+                Zugriff sperren
               </button>
+
+              {pdfURL && (
+                <div className="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4">
+                  <div className="bg-white w-full max-w-6xl h-[90vh] rounded-lg overflow-hidden flex flex-col">
+                    <div className="flex justify-between items-center p-4 border-b border-border">
+                      <h3 className="font-bold">Lebenslauf - Alexander</h3>
+                      <button
+                        onClick={handleClosePDF}
+                        className="text-2xl hover:text-primary transition-colors"
+                      >
+                        ×
+                      </button>
+                    </div>
+                    <iframe
+                      src={pdfURL}
+                      className="flex-1 w-full"
+                      title="Lebenslauf PDF"
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>
