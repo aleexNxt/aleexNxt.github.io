@@ -43,7 +43,7 @@ export default function Experience() {
       period: '2021 - 2023',
       position: 'Fachhochschulreife',
       company: 'Schwerpunkt Informationstechnologie',
-      location: '',
+      location: 'BBS Rostrup',
       description: 'Fachoberschule mit Schwerpunkt Informationstechnologie, Grundlagen der Programmierung und Hardware-nahen Entwicklung.',
       highlights: [
         'Programmierung mit C# und .NET Framework',
