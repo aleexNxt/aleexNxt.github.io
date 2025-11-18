@@ -25,7 +25,7 @@ export default function Experience() {
 
   const experiences = [
     {
-      period: '2022 - Heute',
+      period: '2023 - Heute',
       position: 'Auszubildender Fachinformatiker',
       company: 'Lufthansa Industry Solutions',
       location: 'Frankfurt am Main',
@@ -40,7 +40,7 @@ export default function Experience() {
       ]
     },
     {
-      period: '2019 - 2022',
+      period: '2021 - 2023',
       position: 'Fachhochschulreife',
       company: 'Schwerpunkt Informationstechnologie',
       location: '',
@@ -48,8 +48,7 @@ export default function Experience() {
       highlights: [
         'Programmierung mit C# und .NET Framework',
         'Hardware-Programmierung mit Arduino',
-        'Grundlagen der objektorientierten Programmierung',
-        'Entwicklung von Desktop-Anwendungen'
+        'Grundlagen der objektorientierten Programmierung'
       ]
     }
   ];
