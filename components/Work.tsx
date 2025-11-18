@@ -26,15 +26,15 @@ export default function Work() {
   const skills = [
     {
       category: 'Backend',
-      items: ['Go (Golang)', 'REST APIs', 'gRPC', 'PostgreSQL', 'Redis', 'Docker']
+      items: ['Go (Golang)', 'Spring Boot (Java)', 'REST APIs', 'gRPC', 'PostgreSQL', 'Redis', 'Docker']
     },
     {
-      category: 'Frontend',
-      items: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Responsive Design']
+      category: 'Frontend & Mobile',
+      items: ['Next.js', 'React', 'TypeScript', 'Flutter', 'Tailwind CSS', 'Responsive Design']
     },
     {
-      category: 'Tools & Methoden',
-      items: ['Git', 'Linux', 'Agile/Scrum', 'CI/CD', 'Clean Code', 'Testing']
+      category: 'Architecture & Methoden',
+      items: ['Clean Architecture', 'Domain-Driven Design', 'Git', 'Linux', 'Agile/Scrum', 'CI/CD']
     }
   ];
 

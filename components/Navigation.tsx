@@ -7,7 +7,7 @@ export default function Navigation() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'work', 'cv', 'contact'];
+      const sections = ['home', 'about', 'work', 'experience', 'contact'];
       const current = sections.find(section => {
         const element = document.getElementById(section);
         if (element) {
@@ -27,7 +27,7 @@ export default function Navigation() {
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
     { id: 'work', label: 'Work' },
-    { id: 'cv', label: 'CV' },
+    { id: 'experience', label: 'Experience' },
     { id: 'contact', label: 'Contact' },
   ];
 
