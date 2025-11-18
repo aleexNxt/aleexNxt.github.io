@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ThemeProvider } from "@/lib/theme";
 
 export const metadata: Metadata = {
   title: "Portfolio - Professionelle Webentwicklung",
@@ -14,7 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de" className="scroll-smooth">
-      <body className="font-sans antialiased">{children}</body>
+      <body className="font-sans antialiased bg-white dark:bg-zinc-950 text-primary dark:text-zinc-50 transition-colors">
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import ThemeToggle from './ThemeToggle';
 
 export default function Navigation() {
   const [activeSection, setActiveSection] = useState('home');
@@ -45,7 +46,7 @@ export default function Navigation() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-border">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-zinc-950/90 backdrop-blur-md border-b border-border dark:border-zinc-800">
       <div className="max-w-6xl mx-auto px-6 md:px-12">
         <div className="flex justify-between items-center h-16">
           <a
@@ -57,48 +58,54 @@ export default function Navigation() {
           </a>
 
           {/* Desktop Navigation */}
-          <ul className="hidden md:flex space-x-8">
-            {navItems.map((item) => (
-              <li key={item.id}>
-                <a
-                  href={`#${item.id}`}
-                  className={`text-sm transition-colors relative ${
-                    activeSection === item.id
-                      ? 'text-primary font-medium'
-                      : 'text-secondary hover:text-primary'
-                  }`}
-                >
-                  {item.label}
-                  {activeSection === item.id && (
-                    <span className="absolute -bottom-[21px] left-0 w-full h-[1px] bg-primary" />
-                  )}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <div className="hidden md:flex items-center gap-6">
+            <ul className="flex space-x-8">
+              {navItems.map((item) => (
+                <li key={item.id}>
+                  <a
+                    href={`#${item.id}`}
+                    className={`text-sm transition-colors relative ${
+                      activeSection === item.id
+                        ? 'text-primary dark:text-zinc-50 font-medium'
+                        : 'text-secondary dark:text-zinc-400 hover:text-primary dark:hover:text-zinc-50'
+                    }`}
+                  >
+                    {item.label}
+                    {activeSection === item.id && (
+                      <span className="absolute -bottom-[21px] left-0 w-full h-[1px] bg-primary dark:bg-zinc-50" />
+                    )}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <ThemeToggle />
+          </div>
 
-          {/* Burger Menu Button */}
-          <button
-            className="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Menu"
-          >
-            <span
-              className={`w-6 h-0.5 bg-primary transition-all duration-300 ${
-                isMenuOpen ? 'rotate-45 translate-y-2' : ''
-              }`}
-            />
-            <span
-              className={`w-6 h-0.5 bg-primary transition-all duration-300 ${
-                isMenuOpen ? 'opacity-0' : ''
-              }`}
-            />
-            <span
-              className={`w-6 h-0.5 bg-primary transition-all duration-300 ${
-                isMenuOpen ? '-rotate-45 -translate-y-2' : ''
-              }`}
-            />
-          </button>
+          {/* Mobile Menu Button + Theme Toggle */}
+          <div className="md:hidden flex items-center gap-2">
+            <ThemeToggle />
+            <button
+              className="w-10 h-10 flex flex-col items-center justify-center gap-1.5"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Menu"
+            >
+              <span
+                className={`w-6 h-0.5 bg-primary dark:bg-zinc-50 transition-all duration-300 ${
+                  isMenuOpen ? 'rotate-45 translate-y-2' : ''
+                }`}
+              />
+              <span
+                className={`w-6 h-0.5 bg-primary dark:bg-zinc-50 transition-all duration-300 ${
+                  isMenuOpen ? 'opacity-0' : ''
+                }`}
+              />
+              <span
+                className={`w-6 h-0.5 bg-primary dark:bg-zinc-50 transition-all duration-300 ${
+                  isMenuOpen ? '-rotate-45 -translate-y-2' : ''
+                }`}
+              />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -113,7 +120,7 @@ export default function Navigation() {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden fixed top-16 right-0 h-[calc(100vh-64px)] w-64 bg-white border-l border-border shadow-lg transition-transform duration-300 ease-in-out ${
+        className={`md:hidden fixed top-16 right-0 h-[calc(100vh-64px)] w-64 bg-white dark:bg-zinc-950 border-l border-border dark:border-zinc-800 shadow-lg transition-transform duration-300 ease-in-out ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -125,8 +132,8 @@ export default function Navigation() {
                 onClick={handleNavClick}
                 className={`block py-3 px-4 text-base transition-colors border-l-2 ${
                   activeSection === item.id
-                    ? 'border-primary text-primary font-medium bg-gray-50'
-                    : 'border-transparent text-secondary hover:text-primary hover:border-border'
+                    ? 'border-primary dark:border-zinc-50 text-primary dark:text-zinc-50 font-medium bg-gray-50 dark:bg-zinc-900'
+                    : 'border-transparent text-secondary dark:text-zinc-400 hover:text-primary dark:hover:text-zinc-50 hover:border-border dark:hover:border-zinc-800'
                 }`}
               >
                 {item.label}
