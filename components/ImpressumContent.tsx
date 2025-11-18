@@ -15,7 +15,7 @@ export default function ImpressumContent() {
             E-Mail:{' '}
             <a
               href="mailto:alexander.kruska@protonmail.com"
-              className="text-primary hover:underline"
+              className="text-primary dark:text-white hover:underline"
             >
               alexander.kruska@protonmail.com
             </a>
@@ -24,13 +24,13 @@ export default function ImpressumContent() {
 
         <div>
           <p className="font-medium">Online-Streitbeilegung:</p>
-          <p className="text-sm text-secondary">
+          <p className="text-sm text-secondary dark:text-gray-400">
             Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:{' '}
             <a
               href="https://ec.europa.eu/consumers/odr"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary hover:underline"
+              className="text-primary dark:text-white hover:underline"
             >
               https://ec.europa.eu/consumers/odr
             </a>
@@ -39,19 +39,19 @@ export default function ImpressumContent() {
 
         <div>
           <p className="font-medium">Hinweis:</p>
-          <p className="text-sm text-secondary">
+          <p className="text-sm text-secondary dark:text-gray-400">
             Dies ist eine private, nicht-kommerzielle Website. Sie dient ausschließlich
             der Darstellung meiner beruflichen Qualifikationen und Projekte.
           </p>
         </div>
       </div>
 
-      <div className="mt-8 pt-6 border-t border-border">
+      <div className="mt-8 pt-6 border-t border-border dark:border-gray-800">
         <h3 className="text-lg font-bold mb-4">Haftungsausschluss</h3>
 
-        <div className="space-y-4 text-sm text-secondary">
+        <div className="space-y-4 text-sm text-secondary dark:text-gray-400">
           <div>
-            <p className="font-medium text-primary">Haftung für Inhalte</p>
+            <p className="font-medium text-primary dark:text-white">Haftung für Inhalte</p>
             <p>
               Die Inhalte dieser Website wurden mit größter Sorgfalt erstellt. Für die Richtigkeit,
               Vollständigkeit und Aktualität der Inhalte kann ich jedoch keine Gewähr übernehmen.
@@ -59,7 +59,7 @@ export default function ImpressumContent() {
           </div>
 
           <div>
-            <p className="font-medium text-primary">Haftung für Links</p>
+            <p className="font-medium text-primary dark:text-white">Haftung für Links</p>
             <p>
               Diese Website enthält Links zu externen Websites Dritter, auf deren Inhalte ich keinen
               Einfluss habe. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter
@@ -68,7 +68,7 @@ export default function ImpressumContent() {
           </div>
 
           <div>
-            <p className="font-medium text-primary">Urheberrecht</p>
+            <p className="font-medium text-primary dark:text-white">Urheberrecht</p>
             <p>
               Die durch mich erstellten Inhalte und Werke auf dieser Website unterliegen dem deutschen
               Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung

@@ -79,7 +79,7 @@ export default function Work() {
         >
           {/* Skills Section */}
           <div className="mb-20">
-            <h2 className="text-sm uppercase tracking-wider text-secondary mb-4">
+            <h2 className="text-sm uppercase tracking-wider text-secondary dark:text-gray-400 mb-4">
               Technologien
             </h2>
             <h3 className="text-3xl md:text-4xl font-bold mb-8">
@@ -89,12 +89,12 @@ export default function Work() {
             <div className="grid md:grid-cols-3 gap-8">
               {skills.map((skillGroup, index) => (
                 <div key={index} className="space-y-4">
-                  <h4 className="font-medium text-lg border-b border-border pb-2">
+                  <h4 className="font-medium text-lg border-b border-border dark:border-gray-800 pb-2">
                     {skillGroup.category}
                   </h4>
                   <ul className="space-y-2">
                     {skillGroup.items.map((skill, i) => (
-                      <li key={i} className="text-secondary text-sm">
+                      <li key={i} className="text-secondary dark:text-gray-400 text-sm">
                         {skill}
                       </li>
                     ))}
@@ -106,7 +106,7 @@ export default function Work() {
 
           {/* Projects Section */}
           <div>
-            <h2 className="text-sm uppercase tracking-wider text-secondary mb-4">
+            <h2 className="text-sm uppercase tracking-wider text-secondary dark:text-gray-400 mb-4">
               Projekte
             </h2>
             <h3 className="text-3xl md:text-4xl font-bold mb-8">
@@ -117,14 +117,14 @@ export default function Work() {
               {projects.map((project, index) => (
                 <div
                   key={index}
-                  className="border-b border-border pb-8 last:border-b-0 group"
+                  className="border-b border-border dark:border-gray-800 pb-8 last:border-b-0 group"
                 >
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-3">
                     <div>
-                      <h4 className="text-xl font-bold group-hover:text-accent transition-colors">
+                      <h4 className="text-xl font-bold group-hover:text-accent dark:group-hover:text-gray-300 transition-colors">
                         {project.title}
                       </h4>
-                      <span className="text-xs uppercase tracking-wider text-secondary">
+                      <span className="text-xs uppercase tracking-wider text-secondary dark:text-gray-400">
                         {project.type}
                       </span>
                     </div>
@@ -132,14 +132,14 @@ export default function Work() {
                       {project.tech.map((tech, i) => (
                         <span
                           key={i}
-                          className="text-xs px-2 py-1 border border-border text-secondary"
+                          className="text-xs px-2 py-1 border border-border dark:border-gray-700 text-secondary dark:text-gray-400"
                         >
                           {tech}
                         </span>
                       ))}
                     </div>
                   </div>
-                  <p className="text-secondary leading-relaxed">
+                  <p className="text-secondary dark:text-gray-400 leading-relaxed">
                     {project.description}
                   </p>
                 </div>

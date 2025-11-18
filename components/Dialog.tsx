@@ -34,13 +34,13 @@ export default function Dialog({ isOpen, onClose, title, children }: DialogProps
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
       <div
         ref={dialogRef}
-        className="bg-white max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-border shadow-lg"
+        className="bg-white dark:bg-gray-900 max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-border dark:border-gray-800 shadow-lg"
       >
-        <div className="sticky top-0 bg-white border-b border-border p-6 flex justify-between items-center">
+        <div className="sticky top-0 bg-white dark:bg-gray-900 border-b border-border dark:border-gray-800 p-6 flex justify-between items-center">
           <h2 className="text-2xl font-bold">{title}</h2>
           <button
             onClick={onClose}
-            className="text-2xl hover:text-primary transition-colors w-8 h-8 flex items-center justify-center"
+            className="text-2xl hover:text-primary dark:hover:text-white transition-colors w-8 h-8 flex items-center justify-center"
             aria-label="Schließen"
           >
             ×
