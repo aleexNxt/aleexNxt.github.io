@@ -4,12 +4,14 @@ import Work from '@/components/Work';
 import Experience from '@/components/Experience';
 import Contact from '@/components/Contact';
 import Navigation from '@/components/Navigation';
+import ScrollTextCarousel from '@/components/ScrollTextCarousel';
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-white">
       <Navigation />
       <Hero />
+      <ScrollTextCarousel />
       <About />
       <Work />
       <Experience />
