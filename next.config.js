@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Static export disabled to enable API Routes for secure authentication
-  // output: 'export',
+  output: 'export',
   images: {
     unoptimized: true,
   },
