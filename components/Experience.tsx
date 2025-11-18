@@ -32,11 +32,24 @@ export default function Experience() {
       description: 'Ausbildung zum Fachinformatiker für Anwendungsentwicklung mit Fokus auf Backend-Entwicklung und moderne Web-Technologien.',
       highlights: [
         'Entwicklung von Microservices mit Go und Spring Boot',
-        'Implementierung von REST APIs und gRPC Services',
+        'Implementierung von REST APIs',
         'Frontend-Entwicklung mit Next.js und React',
         'Mobile App-Entwicklung mit Flutter und Clean Architecture',
         'Arbeit in agilen Teams nach Scrum-Methodik',
         'Einsatz von Domain-Driven Design in komplexen Projekten'
+      ]
+    },
+    {
+      period: '2019 - 2022',
+      position: 'Fachhochschulreife',
+      company: 'Schwerpunkt Informationstechnologie',
+      location: '',
+      description: 'Fachoberschule mit Schwerpunkt Informationstechnologie, Grundlagen der Programmierung und Hardware-nahen Entwicklung.',
+      highlights: [
+        'Programmierung mit C# und .NET Framework',
+        'Hardware-Programmierung mit Arduino',
+        'Grundlagen der objektorientierten Programmierung',
+        'Entwicklung von Desktop-Anwendungen'
       ]
     }
   ];
@@ -107,7 +120,7 @@ export default function Experience() {
                 </h5>
                 <p className="text-sm text-secondary leading-relaxed">
                   Tiefgehende Kenntnisse in der Entwicklung skalierbarer Backend-Systeme mit Go und Spring Boot.
-                  Erfahrung mit Microservices-Architekturen, gRPC und REST APIs.
+                  Erfahrung mit Microservices-Architekturen und REST APIs.
                 </p>
               </div>
               <div>

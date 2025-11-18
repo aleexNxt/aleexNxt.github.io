@@ -86,10 +86,26 @@ export default function Contact() {
           </div>
 
           {/* Footer */}
-          <div className="text-center pt-12 border-t border-border">
-            <p className="text-sm text-secondary">
-              © {new Date().getFullYear()} Alexander. Entwickelt mit Next.js
-            </p>
+          <div className="pt-12 border-t border-border">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <p className="text-sm text-secondary">
+                © {new Date().getFullYear()} Alexander Kruska. Entwickelt mit Next.js
+              </p>
+              <div className="flex gap-6">
+                <a
+                  href="mailto:alexander.kruska@protonmail.com?subject=Impressum"
+                  className="text-sm text-secondary hover:text-primary transition-colors"
+                >
+                  Impressum
+                </a>
+                <a
+                  href="mailto:alexander.kruska@protonmail.com?subject=Rechtliches"
+                  className="text-sm text-secondary hover:text-primary transition-colors"
+                >
+                  Rechtliches
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

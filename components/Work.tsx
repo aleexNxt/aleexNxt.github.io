@@ -26,7 +26,7 @@ export default function Work() {
   const skills = [
     {
       category: 'Backend',
-      items: ['Go (Golang)', 'Spring Boot (Java)', 'REST APIs', 'gRPC', 'PostgreSQL', 'Redis', 'Docker']
+      items: ['Go (Golang)', 'Spring Boot (Java)', 'REST APIs', 'PostgreSQL', 'Redis', 'Docker']
     },
     {
       category: 'Frontend & Mobile',
@@ -41,8 +41,8 @@ export default function Work() {
   const projects = [
     {
       title: 'Microservice API',
-      description: 'Entwicklung eines skalierbaren Microservice-Backends mit Go, gRPC und PostgreSQL für die interne Verwaltung von Geschäftsprozessen.',
-      tech: ['Go', 'gRPC', 'PostgreSQL', 'Docker'],
+      description: 'Entwicklung eines skalierbaren Microservice-Backends mit Go und PostgreSQL für die interne Verwaltung von Geschäftsprozessen.',
+      tech: ['Go', 'PostgreSQL', 'Docker'],
       type: 'Backend'
     },
     {
