@@ -8,7 +8,7 @@ import ScrollTextCarousel from '@/components/ScrollTextCarousel';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white dark:bg-gray-900">
       <Navigation />
       <Hero />
       <ScrollTextCarousel />
