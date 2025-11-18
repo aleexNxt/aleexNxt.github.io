@@ -65,7 +65,7 @@ export default function Experience() {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
           }`}
         >
-          <h2 className="text-sm uppercase tracking-wider text-secondary dark:text-gray-400 mb-4">
+          <h2 className="text-sm uppercase tracking-wider text-secondary dark:text-zinc-400 mb-4">
             Erfahrung
           </h2>
           <h3 className="text-3xl md:text-4xl font-bold mb-12">
@@ -74,33 +74,33 @@ export default function Experience() {
 
           <div className="space-y-12">
             {experiences.map((exp, index) => (
-              <div key={index} className="relative pl-8 border-l-2 border-border dark:border-gray-800">
-                <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary dark:bg-white border-4 border-white dark:border-gray-900" />
+              <div key={index} className="relative pl-8 border-l-2 border-border dark:border-zinc-800">
+                <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary dark:bg-zinc-50 border-4 border-white dark:border-gray-900" />
 
                 <div className="space-y-4">
                   <div>
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-2">
                       <h4 className="text-xl font-bold">{exp.position}</h4>
-                      <span className="text-sm text-secondary dark:text-gray-400 font-mono">{exp.period}</span>
+                      <span className="text-sm text-secondary dark:text-zinc-400 font-mono">{exp.period}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-primary dark:text-white">
+                    <div className="flex items-center gap-2 text-primary dark:text-zinc-50">
                       <span className="font-medium">{exp.company}</span>
-                      <span className="text-secondary dark:text-gray-400">•</span>
-                      <span className="text-sm text-secondary dark:text-gray-400">{exp.location}</span>
+                      <span className="text-secondary dark:text-zinc-400">•</span>
+                      <span className="text-sm text-secondary dark:text-zinc-400">{exp.location}</span>
                     </div>
                   </div>
 
-                  <p className="text-secondary dark:text-gray-400 leading-relaxed">{exp.description}</p>
+                  <p className="text-secondary dark:text-zinc-400 leading-relaxed">{exp.description}</p>
 
                   <div className="space-y-2 pt-2">
-                    <h5 className="text-sm font-medium uppercase tracking-wider text-secondary dark:text-gray-400">
+                    <h5 className="text-sm font-medium uppercase tracking-wider text-secondary dark:text-zinc-400">
                       Highlights
                     </h5>
                     <ul className="space-y-2">
                       {exp.highlights.map((highlight, i) => (
                         <li key={i} className="flex items-start gap-3">
-                          <span className="text-primary dark:text-white mt-1">→</span>
-                          <span className="text-secondary dark:text-gray-400">{highlight}</span>
+                          <span className="text-primary dark:text-zinc-50 mt-1">→</span>
+                          <span className="text-secondary dark:text-zinc-400">{highlight}</span>
                         </li>
                       ))}
                     </ul>
@@ -110,23 +110,23 @@ export default function Experience() {
             ))}
           </div>
 
-          <div className="mt-16 p-8 border border-border dark:border-gray-800 bg-gray-50 dark:bg-gray-800/30">
+          <div className="mt-16 p-8 border border-border dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900/20">
             <h4 className="font-bold mb-4">Ausbildungsschwerpunkte</h4>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <h5 className="text-sm font-medium uppercase tracking-wider text-secondary dark:text-gray-400 mb-3">
+                <h5 className="text-sm font-medium uppercase tracking-wider text-secondary dark:text-zinc-400 mb-3">
                   Backend Development
                 </h5>
-                <p className="text-sm text-secondary dark:text-gray-400 leading-relaxed">
+                <p className="text-sm text-secondary dark:text-zinc-400 leading-relaxed">
                   Tiefgehende Kenntnisse in der Entwicklung skalierbarer Backend-Systeme mit Go und Spring Boot.
                   Erfahrung mit Microservices-Architekturen und REST APIs.
                 </p>
               </div>
               <div>
-                <h5 className="text-sm font-medium uppercase tracking-wider text-secondary dark:text-gray-400 mb-3">
+                <h5 className="text-sm font-medium uppercase tracking-wider text-secondary dark:text-zinc-400 mb-3">
                   Full-Stack & Mobile
                 </h5>
-                <p className="text-sm text-secondary dark:text-gray-400 leading-relaxed">
+                <p className="text-sm text-secondary dark:text-zinc-400 leading-relaxed">
                   Moderne Frontend-Entwicklung mit Next.js und React sowie Mobile-Entwicklung mit Flutter.
                   Anwendung von Clean Architecture und Domain-Driven Design.
                 </p>

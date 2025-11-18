@@ -67,7 +67,7 @@ export default function ScrollTextCarousel() {
   return (
     <div
       ref={containerRef}
-      className="w-full overflow-hidden border-y border-border dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/30 py-4"
+      className="w-full overflow-hidden border-y border-border dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-900/30 py-4"
     >
       <div
         className="flex gap-8 whitespace-nowrap will-change-transform"
@@ -79,7 +79,7 @@ export default function ScrollTextCarousel() {
         {[...words, ...words, ...words].map((word, index) => (
           <span
             key={index}
-            className="text-sm font-medium text-secondary/40 dark:text-gray-500/50 uppercase tracking-wider select-none"
+            className="text-sm font-medium text-secondary/40 dark:text-zinc-500/50 uppercase tracking-wider select-none"
           >
             {word}
           </span>
