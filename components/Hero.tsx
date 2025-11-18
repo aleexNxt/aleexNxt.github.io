@@ -21,23 +21,14 @@ export default function Hero() {
           }`}
         >
           <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-8">
-            {/* Profile Image Placeholder */}
+            {/* Profile Image */}
             <div className="flex-shrink-0">
-              <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-2 border-border bg-gray-50 flex items-center justify-center overflow-hidden">
-                {/* Platzhalter für Profilbild - ersetzen Sie dies später mit:
-                    <Image src="/profile.jpg" alt="Alexander" fill className="object-cover" />
-                */}
-                <svg
-                  className="w-16 h-16 md:w-20 md:h-20 text-gray-300"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+              <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-2 border-border overflow-hidden bg-gray-50">
+                <img
+                  src="/images/Profilbild.jpeg"
+                  alt="Alexander Kruska"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
 
