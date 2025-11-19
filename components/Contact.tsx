@@ -79,12 +79,12 @@ export default function Contact() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between py-4 border-b border-border dark:border-zinc-800 group hover:border-primary dark:hover:border-zinc-50 transition-colors"
+                  className="flex flex-col md:flex-row md:items-center md:justify-between py-4 border-b border-border dark:border-zinc-800 group hover:border-primary dark:hover:border-zinc-50 transition-colors gap-2"
                 >
                   <span className="text-sm uppercase tracking-wider text-secondary dark:text-zinc-400">
                     {link.label}
                   </span>
-                  <span className="text-primary dark:text-zinc-50 group-hover:text-accent dark:group-hover:text-gray-300 transition-colors font-mono text-sm">
+                  <span className="text-primary dark:text-zinc-50 group-hover:text-accent dark:group-hover:text-zinc-300 transition-colors font-mono text-sm break-all md:break-normal">
                     {link.value} →
                   </span>
                 </a>
