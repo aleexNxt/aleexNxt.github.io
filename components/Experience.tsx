@@ -43,7 +43,7 @@ export default function Experience() {
       period: '2021 - 2023',
       position: 'Fachhochschulreife',
       company: 'Schwerpunkt Informationstechnologie',
-      location: 'BBS Rostrup',
+      location: 'Niedersachsen',
       description: 'Fachoberschule mit Schwerpunkt Informationstechnologie, Grundlagen der Programmierung und Hardware-nahen Entwicklung.',
       highlights: [
         'Programmierung mit C# und .NET Framework',
@@ -75,7 +75,7 @@ export default function Experience() {
           <div className="space-y-12">
             {experiences.map((exp, index) => (
               <div key={index} className="relative pl-8 border-l-2 border-border dark:border-zinc-800">
-                <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary dark:bg-zinc-50 border-4 border-white dark:border-gray-900" />
+                <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary dark:bg-zinc-50 border-4 border-white dark:border-zinc-950" />
 
                 <div className="space-y-4">
                   <div>
